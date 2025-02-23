@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Program Cost Predictor</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .upload-form {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>Program Cost Predictor</h1>
-    <p>Upload your Excel file containing three tabs:</p>
-    <ul>
-        <li><strong>Program Inventory</strong> (columns: Department, Program Name)</li>
-        <li><strong>Personnel Costs</strong> (columns: Department, Position Name, Cost)</li>
-        <li><strong>Non-Personnel Costs</strong> (columns: Department, Line Item, Cost)</li>
-    </ul>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <p>Select Excel file: <input type="file" name="excel_file" accept=".xlsx"></p>
-        <button type="submit">Upload &amp; Process</button>
-    </form>
+    <div class="upload-form">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <p>Upload your Excel file containing three tabs:</p>
+            <ul>
+                <li><strong>Program Inventory</strong> (columns: Department, Program Name)</li>
+                <li><strong>Personnel Costs</strong> (columns: Department, Position Name, Cost)</li>
+                <li><strong>Non-Personnel Costs</strong> (columns: Department, Line Item, Cost)</li>
+            </ul>
+            <p>Select Excel file: <input type="file" name="excel_file" accept=".xlsx"></p>
+            <button type="submit">Upload & Process</button>
+        </form>
+    </div>
 </body>
 </html>
