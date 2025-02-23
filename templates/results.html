@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Results - Program Cost Predictor</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin-bottom: 30px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Personnel Allocations</h1>
+    <table>
+        <tr>
+            <th>Department</th>
+            <th>Program</th>
+            <th>Position</th>
+            <th>Allocation (%)</th>
+            <th>Cost Allocated</th>
+            <th>FTE</th>
+        </tr>
+        {% for alloc in personnel_allocations %}
+        <tr>
+            <td>{{ alloc['Department'] }}</td>
+            <td>{{ alloc['Program Name'] }}</td>
+            <td>{{ alloc['Position Name'] }}</td>
+            <td>{{ alloc['Allocation'] }}%</td>
+            <td>${{ "%.2f"|format(alloc['Cost']) }}</td>
+            <td>{{ "%.2f"|format(alloc['FTE']) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Non-Personnel Allocations</h1>
+    <table>
+        <tr>
+            <th>Department</th>
+            <th>Program</th>
+            <th>Line Item</th>
+            <th>Allocation (%)</th>
+            <th>Cost Allocated</th>
+        </tr>
+        {% for alloc in non_personnel_allocations %}
+        <tr>
+            <td>{{ alloc['Department'] }}</td>
+            <td>{{ alloc['Program Name'] }}</td>
+            <td>{{ alloc['Line Item'] }}</td>
+            <td>{{ alloc['Allocation'] }}%</td>
+            <td>${{ "%.2f"|format(alloc['Cost']) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Summary</h1>
+    <table>
+        <tr>
+            <th>Program</th>
+            <th>Total Personnel Cost</th>
+            <th>Total Non-Personnel Cost</th>
+            <th>Total FTE</th>
+            <th>Total Cost</th>
+        </tr>
+        {% for prog, data in summary.items() %}
+        <tr>
+            <td>{{ prog }}</td>
+            <td>${{ "%.2f"|format(data['personnel_cost']) }}</td>
+            <td>${{ "%.2f"|format(data['non_personnel_cost']) }}</td>
+            <td>{{ "%.2f"|format(data['FTE']) }}</td>
+            <td>${{ "%.2f"|format(data['total_cost']) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>
